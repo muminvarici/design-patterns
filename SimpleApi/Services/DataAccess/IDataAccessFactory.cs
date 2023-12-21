@@ -3,5 +3,6 @@
 // Abstract Factory Interface
 public interface IDataAccessFactory
 {
+    // Factory method
     IUserRepository CreateUserRepository();
 }

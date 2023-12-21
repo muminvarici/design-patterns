@@ -12,6 +12,7 @@ public class UserService
     private readonly IUserBuilder _userBuilder;
 
     // Abstract Factory and Builder injected through constructor
+    // Factory Method injected through constructor
     public UserService(IDataAccessFactory dataAccessFactory, IUserBuilder userBuilder)
     {
         _userRepository = dataAccessFactory.CreateUserRepository();
