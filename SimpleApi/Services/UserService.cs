@@ -32,6 +32,15 @@ public class UserService
         _userRepository.Save(user);
     }
 
+    public User CloneUser(User prototypeUser)
+    {
+        // Clone the prototype to create a new instance with the same properties
+        var clonedUser = (User)prototypeUser.Clone();
+        clonedUser.Id = 0;
+        _userRepository.Save(clonedUser);
+        return clonedUser;
+    }
+
     public User GetUserById(int userId)
     {
         return _userRepository.GetById(userId);
