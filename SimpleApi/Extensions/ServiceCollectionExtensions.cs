@@ -1,4 +1,5 @@
 ﻿using SimpleApi.Services;
+using SimpleApi.Services.Builders;
 using SimpleApi.Services.DataAccess;
 
 namespace SimpleApi.Extensions;
@@ -15,6 +16,7 @@ public static class ServiceCollectionExtensions
         
         services.AddScoped<UserService>();
 
+        services.AddScoped<IUserBuilder, ConcreteUserBuilder>();
         return services;
     }
 }
