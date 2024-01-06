@@ -1,9 +1,11 @@
-﻿namespace SimpleApi.Services.DataAccess;
+﻿using SimpleApi.Services.Repositories;
 
-// Concrete Factory 1: SQL Server Factory
+namespace SimpleApi.Services.DataAccess;
+
+/// Concrete Factory 1: SQL Server Factory
 public class SqlDataAccessFactory : IDataAccessFactory
 {
-    // Factory method
+    /// Factory method
     public IUserRepository CreateUserRepository()
     {
         return new SqlUserRepository();

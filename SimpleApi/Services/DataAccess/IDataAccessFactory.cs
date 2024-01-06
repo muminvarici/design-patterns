@@ -1,8 +1,10 @@
-﻿namespace SimpleApi.Services.DataAccess;
+﻿using SimpleApi.Services.Repositories;
 
-// Abstract Factory Interface
+namespace SimpleApi.Services.DataAccess;
+
+/// Abstract Factory Interface
 public interface IDataAccessFactory
 {
-    // Factory method
+    /// Factory method
     IUserRepository CreateUserRepository();
 }

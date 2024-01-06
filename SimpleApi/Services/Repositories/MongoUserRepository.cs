@@ -1,8 +1,8 @@
 ﻿using SimpleApi.Models;
 
-namespace SimpleApi.Services;
+namespace SimpleApi.Services.Repositories;
 
-// Concrete Product 2: MongoDB
+/// Concrete Product 2: MongoDB
 public class MongoUserRepository : IUserRepository
 {
     public void Save(User user)
@@ -10,9 +10,9 @@ public class MongoUserRepository : IUserRepository
         // Logic to save user to MongoDB
     }
 
-    public User GetById(int userId)
+    public User? GetById(int userId)
     {
         // Logic to retrieve user from MongoDB
-        return new User();
+        return new User { Id = userId };
     }
 }

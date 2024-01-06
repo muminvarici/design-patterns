@@ -2,10 +2,10 @@
 
 namespace SimpleApi.Services.Builders;
 
-// Concrete builder
+/// Concrete builder
 public class ConcreteUserBuilder : IUserBuilder
 {
-    private readonly User _user = new User();
+    private readonly User _user = new();
 
     public IUserBuilder SetFirstName(string firstName)
     {
