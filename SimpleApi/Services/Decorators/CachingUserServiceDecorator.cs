@@ -8,9 +8,9 @@ public class CachingUserServiceDecorator : IUserService
 {
     private readonly Dictionary<int, User> _cache = new();
     private readonly IUserService _userService;
-    private readonly ILogger<CachingUserServiceDecorator> _logger;
+    private readonly ILogger _logger;
 
-    public CachingUserServiceDecorator(IUserService userService, ILogger<CachingUserServiceDecorator> logger)
+    public CachingUserServiceDecorator(IUserService userService, ILogger logger)
     {
         _userService = userService;
         _logger = logger;

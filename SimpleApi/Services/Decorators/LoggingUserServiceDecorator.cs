@@ -7,9 +7,9 @@ namespace SimpleApi.Services.Decorators;
 public class LoggingUserServiceDecorator : IUserService
 {
     private readonly IUserService _userService;
-    private readonly ILogger<LoggingUserServiceDecorator> _logger;
+    private readonly ILogger _logger;
 
-    public LoggingUserServiceDecorator(IUserService userService, ILogger<LoggingUserServiceDecorator> logger)
+    public LoggingUserServiceDecorator(IUserService userService, ILogger logger)
     {
         _userService = userService;
         _logger = logger;
@@ -27,7 +27,7 @@ public class LoggingUserServiceDecorator : IUserService
     {
         _logger.LogInformation("Retrieving user with ID: {userId}", userId);
         var user = _userService.GetUserById(userId);
-        _logger.LogInformation("User retrieved: {firstName} {lastName}", user?.FirstName, user?.LastName);
+        _logger.LogInformation("User retrieved: {userId} {firstName} {lastName}", userId, user?.FirstName, user?.LastName);
         return user;
     }
 }

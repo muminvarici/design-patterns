@@ -25,6 +25,11 @@ public static class ServiceCollectionExtensions
         });
 
         services.AddScoped<IUserBuilder, ConcreteUserBuilder>();
+
+ 
+        // Register the ILogger interface with the ApplicationLogger implementation
+        services.AddSingleton<ILogger>(_ => ApplicationLogger.GetInstance());
+
         return services;
     }
 
@@ -32,8 +37,8 @@ public static class ServiceCollectionExtensions
     private static IUserService CreateUserDecorators(IServiceProvider serviceProvider) // Factory method to produce user service decorators
     {
         var userService = serviceProvider.GetRequiredService<UserService>();
-        var loggingService = new LoggingUserServiceDecorator(userService, serviceProvider.GetRequiredService<ILogger<LoggingUserServiceDecorator>>());
-        var cachingService = new CachingUserServiceDecorator(loggingService, serviceProvider.GetRequiredService<ILogger<CachingUserServiceDecorator>>());
+        var loggingService = new LoggingUserServiceDecorator(userService, serviceProvider.GetRequiredService<ILogger>());
+        var cachingService = new CachingUserServiceDecorator(loggingService, serviceProvider.GetRequiredService<ILogger>());
         return cachingService;
     }
 }
