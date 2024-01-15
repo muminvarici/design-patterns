@@ -1,5 +1,6 @@
 ﻿using SimpleApi.Models;
 using SimpleApi.Services.Abstractions;
+using SimpleApi.Services.Bridges;
 using SimpleApi.Services.Builders;
 using SimpleApi.Services.DataAccess;
 using SimpleApi.Services.Repositories;

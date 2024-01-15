@@ -51,6 +51,7 @@ public static class ServiceCollectionExtensions
         var userService = serviceProvider.GetRequiredService<UserService>();
         var loggingService = new LoggingUserServiceDecorator(userService, serviceProvider.GetRequiredService<ILogger>());
         var cachingService = new CachingUserServiceDecorator(loggingService, serviceProvider.GetRequiredService<ILogger>());
-        return cachingService;
+        var notification = new NotificationUserServiceDecorator(cachingService, serviceProvider.GetRequiredService<ILogger>());
+        return notification;
     }
 }
