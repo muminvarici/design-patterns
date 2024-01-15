@@ -3,10 +3,9 @@
 public class User : ICloneable
 {
     public int Id { get; set; }
-    public int UserName { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public int Age { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public string? Name { get; set; }
+    public string? Email { get; set; }
 
     // Implement the Clone method
     public object Clone()

@@ -6,5 +6,5 @@ namespace SimpleApi.Services.Abstractions;
 public interface IUserService
 {
     User SaveUser(string firstName, string lastName, int age);
-    User? GetUserById(int userId);
+    Task<User?> GetUserById(int userId);
 }

@@ -7,21 +7,15 @@ public class ConcreteUserBuilder : IUserBuilder
 {
     private readonly User _user = new();
 
-    public IUserBuilder SetFirstName(string firstName)
+    public IUserBuilder SetName(string firstName)
     {
-        _user.FirstName = firstName;
+        _user.Name = firstName;
         return this;
     }
 
-    public IUserBuilder SetLastName(string lastName)
+    public IUserBuilder SetEmailName(string email)
     {
-        _user.LastName = lastName;
-        return this;
-    }
-
-    public IUserBuilder SetAge(int age)
-    {
-        _user.Age = age;
+        _user.Email = email;
         return this;
     }
 

@@ -14,9 +14,9 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
-    public IActionResult Get(int id)
+    public async Task<IActionResult> Get(int id)
     {
-        var user = _userService.GetUserById(id);
+        var user = await _userService.GetUserById(id);
         if (user == null)
             return NotFound();
         return Ok(user); //TODO  we need to map domain object to another type later

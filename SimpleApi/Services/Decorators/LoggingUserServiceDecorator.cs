@@ -23,11 +23,11 @@ public class LoggingUserServiceDecorator : IUserService
         return user;
     }
 
-    public User? GetUserById(int userId)
+    public async Task<User?> GetUserById(int userId)
     {
         _logger.LogInformation("Retrieving user with ID: {userId}", userId);
-        var user = _userService.GetUserById(userId);
-        _logger.LogInformation("User retrieved: {userId} {firstName} {lastName}", userId, user?.FirstName, user?.LastName);
+        var user = await _userService.GetUserById(userId);
+        _logger.LogInformation("User retrieved: {userId} {firstName} {lastName}", userId, user?.Name, user?.Username);
         return user;
     }
 }

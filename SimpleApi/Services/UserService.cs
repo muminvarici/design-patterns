@@ -26,9 +26,8 @@ public class UserService : IUserService
     {
         // Use the builder to construct the User object
         var user = _userBuilder
-            .SetFirstName(firstName)
-            .SetLastName(lastName)
-            .SetAge(age)
+            .SetName(firstName)
+            .SetEmailName(lastName)
             .Build();
 
         // Save the user using the repository
@@ -36,7 +35,7 @@ public class UserService : IUserService
         return user;
     }
 
-    public User? GetUserById(int userId)
+    public Task<User?> GetUserById(int userId)
     {
         return _userRepository.GetById(userId);
     }

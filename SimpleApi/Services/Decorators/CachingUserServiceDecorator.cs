@@ -25,7 +25,7 @@ public class CachingUserServiceDecorator : IUserService
         return user;
     }
 
-    public User? GetUserById(int userId)
+    public async Task<User?> GetUserById(int userId)
     {
         // Try to get the user from the cache
         if (_cache.TryGetValue(userId, out var cachedUser))
@@ -35,7 +35,7 @@ public class CachingUserServiceDecorator : IUserService
         }
 
         // If not in the cache, fetch from the underlying service
-        var user = _userService.GetUserById(userId);
+        var user = await _userService.GetUserById(userId);
         if (user == null)
             return null; //todo handle this (throw or implement result pattern)
 

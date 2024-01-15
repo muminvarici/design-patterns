@@ -5,6 +5,6 @@ namespace SimpleApi.Services.Repositories;
 /// Abstract Product Interface
 public interface IUserRepository
 {
-    void Save(User user);
-    User? GetById(int userId);
+    Task Save(User user);
+    Task<User?> GetById(int userId);
 }
