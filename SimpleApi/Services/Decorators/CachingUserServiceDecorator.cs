@@ -16,9 +16,9 @@ public class CachingUserServiceDecorator : IUserService
         _logger = logger;
     }
 
-    public User SaveUser(string firstName, string lastName, int age)
+    public User SaveUser(string firstName, string lastName)
     {
-        var user = _userService.SaveUser(firstName, lastName, age);
+        var user = _userService.SaveUser(firstName, lastName);
         // Add the user to the cache
         _cache[user.Id] = user;
 
@@ -43,5 +43,18 @@ public class CachingUserServiceDecorator : IUserService
         _cache[userId] = user;
 
         return user;
+    }
+
+    public async Task<User?> CreateUser(User user)
+    {
+        // If not in the cache, fetch from the underlying service
+        var result = await _userService.CreateUser(user);
+        if (result == null)
+            return null; //todo handle this (throw or implement result pattern)
+
+        // Add to the cache for future use
+        _cache[result.Id] = result;
+
+        return result;
     }
 }

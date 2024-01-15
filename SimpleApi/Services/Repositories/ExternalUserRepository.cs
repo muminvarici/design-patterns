@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using Microsoft.AspNetCore.HttpOverrides;
 using SimpleApi.Models;
 using SimpleApi.Services.Adapters;
 
@@ -17,7 +16,7 @@ public class ExternalUserRepository : IUserRepository
         _dataAdapter = dataAdapterFactory.CreateAdapter(ContentType);
     }
 
-    public async Task Save(User user)
+    public async Task<User?> Save(User user)
     {
         var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/Users");
         request.Headers.Add("accept", ContentType);
@@ -27,23 +26,16 @@ public class ExternalUserRepository : IUserRepository
         response.EnsureSuccessStatusCode();
         var responseContent = await response.Content.ReadAsStringAsync();
         var result = _dataAdapter.Deserialize<User>(responseContent);
+        return result;
     }
 
     public async Task<User?> GetById(int userId)
     {
-        try
-        {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"api/v1/Users/{userId}");
-            request.Headers.Add("accept", ContentType);
-            var response = await _httpClient.SendAsync(request);
-            response.EnsureSuccessStatusCode();
-            var content = await response.Content.ReadAsStringAsync();
-            return _dataAdapter.Deserialize<User>(content);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            throw;
-        }
+        var request = new HttpRequestMessage(HttpMethod.Get, $"api/v1/Users/{userId}");
+        request.Headers.Add("accept", ContentType);
+        var response = await _httpClient.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        return _dataAdapter.Deserialize<User>(content);
     }
 }

@@ -15,10 +15,10 @@ public class LoggingUserServiceDecorator : IUserService
         _logger = logger;
     }
 
-    public User SaveUser(string firstName, string lastName, int age)
+    public User SaveUser(string firstName, string lastName)
     {
         _logger.LogInformation("Saving user: {firstName} {lastName}", firstName, lastName);
-        var user = _userService.SaveUser(firstName, lastName, age);
+        var user = _userService.SaveUser(firstName, lastName);
         _logger.LogInformation("User saved successfully.");
         return user;
     }
@@ -29,5 +29,13 @@ public class LoggingUserServiceDecorator : IUserService
         var user = await _userService.GetUserById(userId);
         _logger.LogInformation("User retrieved: {userId} {firstName} {lastName}", userId, user?.Name, user?.Username);
         return user;
+    }
+
+    public async Task<User?> CreateUser(User user)
+    {
+        _logger.LogInformation("Retrieving user with ID: @{userId}", user);
+        var result = await _userService.CreateUser(user);
+        _logger.LogInformation("User retrieved: {userId} {firstName} {lastName}", result!.Id, result.Name, result?.Username);
+        return result;
     }
 }

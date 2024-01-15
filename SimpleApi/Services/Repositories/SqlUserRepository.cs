@@ -5,7 +5,7 @@ namespace SimpleApi.Services.Repositories;
 /// Concrete Product 1: SQL Server
 public class SqlUserRepository : IUserRepository
 {
-    public Task Save(User user)
+    public Task<User?> Save(User user)
     {
         // Logic to save user to SQL Server
         throw new NotImplementedException();

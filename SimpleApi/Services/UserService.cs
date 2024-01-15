@@ -22,7 +22,13 @@ public class UserService : IUserService
         _userBuilder = userBuilder;
     }
 
-    public User SaveUser(string firstName, string lastName, int age)
+    public Task<User?> CreateUser(User user)
+    {
+        // Create a new instance
+        return _userRepository.Save(user);
+    }
+
+    public User SaveUser(string firstName, string lastName)
     {
         // Use the builder to construct the User object
         var user = _userBuilder

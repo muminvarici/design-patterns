@@ -5,7 +5,7 @@ namespace SimpleApi.Services.Repositories;
 /// Concrete Product 2: MongoDB
 public class MongoUserRepository : IUserRepository
 {
-    public Task Save(User user)
+    public Task<User?> Save(User user)
     {
         // Logic to save user to MongoDB
         throw new NotImplementedException();
